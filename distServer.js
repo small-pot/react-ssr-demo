@@ -1,9 +1,8 @@
-import render from "./tools/render";
-const path = require("path")
-const express = require("express")
-const proxy = require('http-proxy-middleware');
-import React from 'react'
+import path from "path"
+import express from "express"
+import proxy from 'http-proxy-middleware'
 import stats from './dist/loadable-stats.json'
+import render from "./tools/render";
 
 const app = express(),
     PORT = 8888 // 设置启动端口

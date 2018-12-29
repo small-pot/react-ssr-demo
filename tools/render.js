@@ -16,7 +16,6 @@ export default async function (req,res,stats) {
     let data={};
     if(item.getSyncDate){
         data=await item.getSyncDate(req)
-        console.log(data)
     }
     const extractor = new ChunkExtractor({ stats,entrypoints:'app' })
     const html = renderToStaticMarkup(extractor.collectChunks(<App location={req.url} context={{}} initState={data}/>))

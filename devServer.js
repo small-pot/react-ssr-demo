@@ -15,13 +15,6 @@ app.use(webpackDevMiddleware(clientCompiler, {
     publicPath: clientConfig.output.publicPath,
 }))
 let loadableStats,render
-const update=()=>{
-    if(loadableStats&&render){
-        app.use((req, res, next) => {
-            render(req, res, loadableStats)
-        })
-    }
-}
 clientCompiler.hooks.done.tap("done", stats => {
     const info = stats.toJson();
     if (stats.hasWarnings()) {
@@ -31,7 +24,6 @@ clientCompiler.hooks.done.tap("done", stats => {
         return reject(info.errors)
     }
     loadableStats=JSON.parse(clientCompiler.outputFileSystem.readFileSync(path.join(clientCompiler.outputPath,'loadable-stats.json'),'utf-8'))
-    update()
 });
 
 const PORT = 9999
@@ -49,10 +41,12 @@ compiler.watch({}, (err, stats) => {
     }
     vm.runInNewContext(renderStr, sandbox)
     render = sandbox.module.exports.default
-    update()
 })
 app.use(proxy('/API', {target: `http://192.168.20.151:9000`, changeOrigin: true}))
 app.use('/static', express.static(path.join(__dirname, 'source/static')))
+app.use((req, res) => {
+    loadableStats&&render&&render(req, res, loadableStats)
+})
 app.listen(PORT, function () {
     console.log("成功启动：localhost:" + PORT)
 })
