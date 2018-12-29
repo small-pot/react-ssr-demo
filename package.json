@@ -7,7 +7,8 @@
     "dev": "babel-node devServer.js",
     "build": "rimraf dist && babel-node webpack.build.js && webpack --config=webpack.server.js",
     "server": "babel-node dist/server.js",
-    "test": "babel-node test.js"
+    "test": "babel-node test.js",
+    "debug": "babel-node --inspect devServer.js"
   },
   "author": "",
   "license": "ISC",
