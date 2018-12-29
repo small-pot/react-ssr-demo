@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const nodeExternals = require("webpack-node-externals");
 const baseWebpackConfig = require("./webpack.base.config");
 const babelConfig=require('./tools/serverBabelConfig')
-baseWebpackConfig.plugins=[];
 const webpackConfig = merge(baseWebpackConfig,{
     mode:'development',
     entry: {

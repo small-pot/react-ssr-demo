@@ -5,6 +5,7 @@ const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const CopyWebpackPlugin=require('copy-webpack-plugin')
 const babelConfig=require('./tools/clentBabelConfig')
+const LoadablePlugin = require('@loadable/webpack-plugin')
 const ora = require('ora');
 const buildConfig=merge(config,{
     mode:'production',
@@ -45,6 +46,7 @@ const buildConfig=merge(config,{
             {from: __dirname + '/source/static',
                 to:__dirname + '/dist/static'}
                 ]),
+        new LoadablePlugin()
     ]
 })
 const spinner = ora('building for production...')

@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const LoadablePlugin = require('@loadable/webpack-plugin')
 const isPro = process.env.NODE_ENV === 'production';
 
 
@@ -63,8 +62,5 @@ module.exports = {
                 }
             }
         ]
-    },
-    plugins: [
-        new LoadablePlugin()
-    ]
+    }
 };

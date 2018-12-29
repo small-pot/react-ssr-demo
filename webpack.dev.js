@@ -3,6 +3,7 @@ const config=require('./webpack.base.config')
 const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const babelConfig=require('./tools/clentBabelConfig')
+const LoadablePlugin = require('@loadable/webpack-plugin')
 const webpackConfig =merge(config,{
     mode:'development',
     devtool: '#cheap-module-eval-source-map',
@@ -28,7 +29,7 @@ const webpackConfig =merge(config,{
         new MiniCssExtractPlugin({
             filename: "[name].css"
         }),
-        new webpack.NamedModulesPlugin()
+        new LoadablePlugin()
     ]
 });
 module.exports=webpackConfig
