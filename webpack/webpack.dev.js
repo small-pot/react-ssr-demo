@@ -1,10 +1,10 @@
-const webpack=require('webpack');
-const config=require('./webpack.base.config')
-const merge = require('webpack-merge')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const babelConfig=require('./tools/clentBabelConfig')
-const LoadablePlugin = require('@loadable/webpack-plugin')
-const webpackConfig =merge(config,{
+import webpack from "webpack"
+import baseWebpackConfig from './webpack.base.config'
+import merge from 'webpack-merge'
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
+import {clientConfig} from "../tools/babelConfig"
+import LoadablePlugin from '@loadable/webpack-plugin'
+const webpackConfig =merge(baseWebpackConfig,{
     mode:'development',
     devtool: '#cheap-module-eval-source-map',
     module: {
@@ -14,7 +14,7 @@ const webpackConfig =merge(config,{
                 use: [
                     {
                         loader: "babel-loader",
-                        options: babelConfig
+                        options: clientConfig
                     }
                 ],
                 exclude: /node_modules/
@@ -32,4 +32,4 @@ const webpackConfig =merge(config,{
         new LoadablePlugin()
     ]
 });
-module.exports=webpackConfig
+export default webpackConfig

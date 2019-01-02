@@ -1,13 +1,14 @@
-const webpack = require("webpack");
-const merge = require("webpack-merge");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const nodeExternals = require("webpack-node-externals");
-const baseWebpackConfig = require("./webpack.base.config");
-const babelConfig=require('./tools/serverBabelConfig')
+import webpack from "webpack"
+import baseWebpackConfig from './webpack.base.config'
+import merge from "webpack-merge"
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
+import nodeExternals from "webpack-node-externals"
+import {serverConfig} from "../tools/babelConfig";
+import path from 'path'
 const webpackConfig = merge(baseWebpackConfig,{
     mode:'development',
     entry: {
-        app: "./tools/render.js"
+        app: path.resolve(__dirname,"../tools/render.js")
     },
     output: {
         filename: "render.js",
@@ -31,7 +32,7 @@ const webpackConfig = merge(baseWebpackConfig,{
                 use: [
                     {
                         loader: "babel-loader",
-                        options: babelConfig
+                        options: serverConfig
                     }
                 ],
                 exclude: /node_modules/
@@ -49,4 +50,4 @@ const webpackConfig = merge(baseWebpackConfig,{
         })
     ]
 })
-module.exports=webpackConfig
+export default webpackConfig

@@ -1,15 +1,15 @@
 {
-  "name": "app",
+  "name": "react-ssr",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "dev": "babel-node devServer.js",
-    "build": "rimraf dist && babel-node webpack.build.js && webpack --config=webpack.server.js",
     "server": "babel-node dist/server.js",
-    "debug": "babel-node --inspect devServer.js"
+    "debug": "babel-node --inspect devServer.js",
+    "build": "rimraf dist && babel-node tools/build.js"
   },
-  "author": "",
+  "author": "guoquankai@cnstrong.cn",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.2.3",

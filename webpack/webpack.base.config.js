@@ -1,5 +1,5 @@
-const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import path from 'path'
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
 const isPro = process.env.NODE_ENV === 'production';
 
 
@@ -20,17 +20,17 @@ function use(loaders) {
     return [MiniCssExtractPlugin.loader, ...loaders]
 }
 
-module.exports = {
-    entry: {app: './source/client-entry.js'},
+export default {
+    entry: {app: path.resolve(__dirname,'../source/client-entry.js')},
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../dist'),
         filename: '[name].js',
         publicPath: '/'
     },
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, 'source'),
-            "#":path.resolve(__dirname, 'source/utils'),
+            '@': path.resolve(__dirname, '../source'),
+            "#":path.resolve(__dirname, '../source/utils'),
         }
     },
     module: {
@@ -58,7 +58,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 8192,
-                    name: 'img/[name].[hash:7].[ext]'
+                    name: isPro?'img/[name].[hash:7].[ext]':'img/[name].[ext]'
                 }
             }
         ]

@@ -2,11 +2,11 @@ import proxy from 'http-proxy-middleware'
 import path from 'path'
 import express from 'express'
 import webpack from 'webpack'
-import webpackConfig from './webpack.devServer'
+import serverConfig from './webpack/webpack.devServer'
 import MFS from 'memory-fs'
 import vm from 'vm'
 import webpackDevMiddleware from "webpack-dev-middleware"
-import clientConfig from './webpack.dev.js'
+import clientConfig from './webpack/webpack.dev.js'
 const app = express()
 const clientCompiler = webpack(clientConfig)
 app.use(webpackDevMiddleware(clientCompiler, {
@@ -28,12 +28,12 @@ clientCompiler.hooks.done.tap("done", stats => {
 
 const PORT = 9999
 const mfs = new MFS()
-const compiler = webpack(webpackConfig)
-compiler.outputFileSystem = mfs;
-compiler.watch({}, (err, stats) => {
+const serverCompiler = webpack(serverConfig)
+serverCompiler.outputFileSystem = mfs;
+serverCompiler.watch({}, (err, stats) => {
     if (err) return console.error(err)
     console.log('compiler done')
-    const renderStr = mfs.readFileSync(path.join(webpackConfig.output.path, webpackConfig.output.filename), 'utf-8');
+    const renderStr = mfs.readFileSync(path.join(serverConfig.output.path, serverConfig.output.filename), 'utf-8');
     const sandbox = {
         console,
         module,
