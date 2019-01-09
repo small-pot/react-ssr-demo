@@ -1,4 +1,3 @@
-//import rootReducer from './rootReducer'
 import rootModel from './model'
 import { createStore,applyMiddleware,combineReducers } from 'redux'
 import getReducer from './getReducer'
