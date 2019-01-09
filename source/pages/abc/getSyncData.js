@@ -7,5 +7,5 @@ export default async function (req) {
         method:'get',
         url:'/API/Attendance/getTime.htm'
     })
-    return {abc:{time:timeFormat(data,'YYYY-MM-DD')}}
+    return {abc:{time:timeFormat(data.data,'YYYY-MM-DD')}}
 }

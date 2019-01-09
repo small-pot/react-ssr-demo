@@ -22,6 +22,6 @@ export default async function (req,res,stats) {
     const js = extractor.getScriptTags()
     const css= extractor.getStyleTags()
     const result=getTpl(item,html,data,js,css)
-    console.log(result)
+    console.log(js)
     res.send(result)
 }

@@ -28,14 +28,4 @@ http.interceptors.request.use(function (config) {
 http.interceptors.response.use((response) => {
   return response.data;
 })
-export default function(opt){
-  return new Promise((resolve, reject) => {
-    http(opt).then(res=>{
-      if(res.success){
-        resolve(res.data)
-      }else{
-        reject(res)
-      }
-    })
-  })
-};
+export default http
