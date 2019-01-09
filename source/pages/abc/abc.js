@@ -28,7 +28,7 @@ class Hello extends React.Component{
         this.history=createHashHistory()
     }
     timeChange(moment,time){
-        this.props.dispatch({type:'getTime',time})
+        this.props.dispatch({type:'abc/getTime',time})
     }
     render(){
         return <div className='abc'>
@@ -49,7 +49,8 @@ class Hello extends React.Component{
     }
 }
 export default connect(state=>{
+    console.log(state)
     return {
-        time:state.time
+        time:state.abc.time
     }
 })(Hello)
