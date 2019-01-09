@@ -7,7 +7,7 @@ export default {
         }
     },
     reducer:{
-        saveTime(state={time:Date.now()},action){
+        saveTime(state,action){
             return {
                 ...state,
                 time:action.time
