@@ -12,12 +12,9 @@ import createHashHistory from 'history/createHashHistory';
 
 
 class Hello extends React.Component{
-    static propTypes={
-        time:PropTypes.string
-    }
     constructor(props){
         super(props);
-        let a=2;
+        var a=3;
         http({
             method:'get',
             url:'/API/Attendance/getTime.htm'
