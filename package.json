@@ -9,8 +9,12 @@
       "git add"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "scripts": {
-    "precommit": "lint-staged",
     "dev": "babel-node devServer.js",
     "server": "babel-node dist/server.js",
     "debug": "babel-node --inspect devServer.js",
@@ -40,6 +44,8 @@
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.28.11",
     "eslint": "^5.12.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-webpack": "^0.10.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.3",
