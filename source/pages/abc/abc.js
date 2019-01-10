@@ -21,7 +21,7 @@ class Hello extends React.Component{
             method:'get',
             url:'/API/Attendance/getTime.htm'
         }).then(res=>{
-            //console.log(88888,res);
+            console.log(88888,res);
         });
     }
     componentDidMount(){
