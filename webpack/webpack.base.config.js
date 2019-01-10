@@ -37,12 +37,10 @@ export default {
         rules: [
             {
                 test: /\.css$/,
-                //include: [path.join(__dirname, 'source')],
                 use: use(cssLoader)
             },
             {
                 test: /\.less$/,
-                //include: [path.join(__dirname, 'source')],
                 use: use([
                     ...cssLoader,
                     {
