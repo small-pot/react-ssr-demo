@@ -17,9 +17,6 @@
                 }
         },
         "settings": {
-                "import/ignore": [
-                        "\\.(jpg|png|less|css)$"
-                ],
                 "import/resolver": {
                         "alias": {
                                 "map": [
@@ -38,7 +35,7 @@
                 "quotes": 0,
                 "no-console": 1,
                 "no-debugger": 1,
-                "no-var": 1,
+                "no-var": 2,
                 "no-unused-vars": 0,
                 "semi": [1, "always"],
                 "no-trailing-spaces": 0,

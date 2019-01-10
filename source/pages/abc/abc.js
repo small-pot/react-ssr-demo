@@ -17,11 +17,12 @@ class Hello extends React.Component{
     }
     constructor(props){
         super(props);
+        let a=2;
         http({
             method:'get',
             url:'/API/Attendance/getTime.htm'
         }).then(res=>{
-            console.log(88888,res);
+            //console.log(88888,res);
         });
     }
     componentDidMount(){
