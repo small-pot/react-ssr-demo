@@ -1,12 +1,12 @@
-import React from 'react'
-import './abc.less'
-import http from '#/http'
+import React from 'react';
+import './abc.less';
+import http from '#/http';
 import { HashRouter,Switch, Route } from "react-router-dom";
-import Hash from '../../components/Hash'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import Hash from '../../components/Hash';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import { DatePicker } from 'antd';
-import moment from '#/moment'
+import moment from '#/moment';
 import createHashHistory from 'history/createHashHistory';
 
 
@@ -16,26 +16,26 @@ class Hello extends React.Component{
         time:PropTypes.string
     }
     constructor(props){
-        super(props)
+        super(props);
         http({
             method:'get',
             url:'/API/Attendance/getTime.htm'
         }).then(res=>{
             //console.log(88888,res)
-        })
+        });
     }
     componentDidMount(){
-        this.history=createHashHistory()
+        this.history=createHashHistory();
     }
     timeChange(moment,time){
-        this.props.dispatch({type:'abc/getTime',time})
+        this.props.dispatch({type:'abc/getTime',time});
     }
     render(){
-        return <div className='abc'>
+        return (<div className="abc">
             <img src={require('../../img/gg.jpg')} alt=""/>
             <div onClick={()=>console.log(8888)}>time:{this.props.time}</div>
             <DatePicker onChange={(moment,val)=>this.timeChange(moment,val)} value={moment(this.props.time)}/>
-            <div className='btn-box'>
+            <div className="btn-box">
                 <a onClick={()=>this.history.push('/abc')}>to abc</a>
                 <a onClick={()=>this.history.push('/ttt')}>to ttt</a>
             </div>
@@ -45,12 +45,12 @@ class Hello extends React.Component{
                     <Route path={'/ttt'} component={()=><div>我是ttt组件</div>} />
                 </Switch>
             </Hash>
-        </div>
+        </div>);
     }
 }
 export default connect(state=>{
-    console.log(state)
+    console.log(state);
     return {
         time:state.abc.time
-    }
-})(Hello)
+    };
+})(Hello);
