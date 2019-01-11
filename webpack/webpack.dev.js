@@ -4,13 +4,15 @@ import merge from 'webpack-merge'
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
 import {clientConfig} from "../tools/babelConfig"
 import LoadablePlugin from '@loadable/webpack-plugin'
+import path from 'path'
 const webpackConfig =merge(baseWebpackConfig,{
     mode:'development',
     devtool: '#cheap-module-eval-source-map',
+    entry: {app:[path.resolve(__dirname,'../source/client-entry.js'),'webpack-hot-middleware/client?reload=true&noInfo=true']},
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 use: [
                     {
                         loader: "babel-loader",

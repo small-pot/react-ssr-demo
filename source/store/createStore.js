@@ -2,7 +2,7 @@ import rootModel from './model';
 import { createStore,applyMiddleware,combineReducers } from 'redux';
 import getReducer from './getReducer';
 import createSagaMiddleware from 'redux-saga';
-import { take } from 'redux-saga/effects';
+import { takeEvery,take,fork,call,all } from 'redux-saga/effects';
 
 export default function (model,initState={}) {
     const saga={
@@ -27,10 +27,13 @@ export default function (model,initState={}) {
         initState,
         applyMiddleware(sagaMiddleware)
     );
-    sagaMiddleware.run(function*() {
-        const action=yield take('*');//监听全部action
-        const typeArr=action.type.split('/');
-        yield saga[typeArr[0]][typeArr[1]](action);//执行saga中的方法
+    sagaMiddleware.run(function *() {
+        yield takeEvery('*',function *(action) {
+            if(action.type.indexOf('/')!==-1){
+                const typeArr=action.type.split('/');
+                yield saga[typeArr[0]][typeArr[1]](action);
+            }
+        });
     });
     return store;
 }

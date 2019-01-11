@@ -1,5 +1,6 @@
-import loadable from '@loadable/component'
+import loadable from '@loadable/component';
 export default {
     path:'/test',
-    Component: loadable(()=>import('./test'))
-}
+    Component: loadable(()=>import('./test')),
+    model: loadable.lib(()=>import('./testModel'))
+};

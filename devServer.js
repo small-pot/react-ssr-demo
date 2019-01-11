@@ -7,10 +7,12 @@ import MFS from 'memory-fs'
 import vm from 'vm'
 import webpackDevMiddleware from "webpack-dev-middleware"
 import webpackHotMiddleware from 'webpack-hot-middleware'
+import proxySetting from './tools/proxySetting'
 import clientConfig from './webpack/webpack.dev.js'
 const app = express()
 const clientCompiler = webpack(clientConfig)
 app.use(webpackDevMiddleware(clientCompiler, {
+    noInfo: true,
     serverSideRender: true,
     //绑定中间件的公共路径,与webpack配置的路径相同
     publicPath: clientConfig.output.publicPath,
@@ -44,7 +46,9 @@ serverCompiler.watch({}, (err, stats) => {
     vm.runInNewContext(renderStr, sandbox)
     render = sandbox.module.exports.default
 })
-app.use(proxy('/API', {target: `http://192.168.20.151:9000`, changeOrigin: true}))
+for(let key in proxySetting){
+    app.use(proxy(key, {target: proxySetting[key], changeOrigin: true}))
+}
 app.use('/static', express.static(path.join(__dirname, 'source/static')))
 app.use((req, res) => {
     loadableStats&&render&&render(req, res, loadableStats)

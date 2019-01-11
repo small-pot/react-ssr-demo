@@ -22,13 +22,13 @@ function use(loaders) {
 }
 
 export default {
-    entry: {app:[path.resolve(__dirname,'../source/client-entry.js'),'webpack-hot-middleware/client?reload=true']},
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: '[name].js',
         publicPath: '/'
     },
     resolve: {
+        extensions: [".jsx", ".js", ".json"],
         alias: {
             '@': path.resolve(__dirname, '../source'),
             "#":path.resolve(__dirname, '../source/utils'),

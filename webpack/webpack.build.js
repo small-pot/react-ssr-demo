@@ -10,6 +10,7 @@ import path from 'path'
 const buildConfig = merge(baseWebpackConfig, {
     mode: 'production',
     devtool: false,
+    entry: {app:path.resolve(__dirname,'../source/client-entry.js')},
     output: {
         filename: 'js/[name].[chunkhash].js'
     },
@@ -23,7 +24,7 @@ const buildConfig = merge(baseWebpackConfig, {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 use: [
                     {
                         loader: "babel-loader",

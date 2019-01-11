@@ -22,7 +22,7 @@ const webpackConfig = merge(baseWebpackConfig,{
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 use: [
                     {
                         loader: "babel-loader",
