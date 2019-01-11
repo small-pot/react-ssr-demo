@@ -1,5 +1,4 @@
-import React from 'react'
-
-export default function () {
-    return <div>test</div>
-}
+import React from 'react';
+import Tree from '@/components/common/tree';
+console.log(999);
+export default Tree;

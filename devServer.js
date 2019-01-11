@@ -6,6 +6,7 @@ import serverConfig from './webpack/webpack.devServer'
 import MFS from 'memory-fs'
 import vm from 'vm'
 import webpackDevMiddleware from "webpack-dev-middleware"
+import webpackHotMiddleware from 'webpack-hot-middleware'
 import clientConfig from './webpack/webpack.dev.js'
 const app = express()
 const clientCompiler = webpack(clientConfig)
@@ -14,6 +15,7 @@ app.use(webpackDevMiddleware(clientCompiler, {
     //绑定中间件的公共路径,与webpack配置的路径相同
     publicPath: clientConfig.output.publicPath,
 }))
+app.use(webpackHotMiddleware(clientCompiler))
 let loadableStats,render
 clientCompiler.hooks.done.tap("done", stats => {
     const info = stats.toJson();

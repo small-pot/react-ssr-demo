@@ -29,7 +29,8 @@ const webpackConfig =merge(baseWebpackConfig,{
         new MiniCssExtractPlugin({
             filename: "[name].css"
         }),
-        new LoadablePlugin()
+        new LoadablePlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ]
 });
 export default webpackConfig

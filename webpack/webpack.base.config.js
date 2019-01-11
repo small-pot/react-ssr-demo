@@ -1,5 +1,6 @@
 import path from 'path'
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
+import modifyVars from '../tools/modifyVars'
 const isPro = process.env.NODE_ENV === 'production';
 
 
@@ -21,7 +22,7 @@ function use(loaders) {
 }
 
 export default {
-    entry: {app: path.resolve(__dirname,'../source/client-entry.js')},
+    entry: {app:[path.resolve(__dirname,'../source/client-entry.js'),'webpack-hot-middleware/client?reload=true']},
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: '[name].js',
@@ -46,6 +47,7 @@ export default {
                     {
                         loader: "less-loader",
                         options: {
+                            modifyVars,
                             javascriptEnabled: true
                         }
                     }])

@@ -22,7 +22,6 @@ class Hello extends React.Component{
             method:'get',
             url:'/API/Attendance/getTime.htm'
         }).then(res=>{
-            //console.log(88888,res);
         });
     }
     componentDidMount(){
@@ -33,8 +32,9 @@ class Hello extends React.Component{
     }
     render(){
         return (<div className="abc">
+            <h1>hello</h1>
             <img src={require('../../img/gg.jpg')} alt=""/>
-            <div onClick={()=>console.log(8888)}>time:{this.props.time}</div>
+            <div>time:{this.props.time}</div>
             <DatePicker onChange={(moment,val)=>this.timeChange(moment,val)} value={moment(this.props.time)}/>
             <div className="btn-box">
                 <a onClick={()=>this.history.push('/abc')}>to abc</a>
