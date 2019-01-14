@@ -3,9 +3,10 @@ import baseWebpackConfig from './webpack.base.config'
 import merge from 'webpack-merge'
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import {clientConfig} from "../tools/babelConfig"
+import {clientConfig} from "./babelConfig"
 import LoadablePlugin from '@loadable/webpack-plugin'
 import path from 'path'
+import {clientLessPro} from './lessLoaderConfig'
 
 const buildConfig = merge(baseWebpackConfig, {
     mode: 'production',
@@ -32,6 +33,18 @@ const buildConfig = merge(baseWebpackConfig, {
                     }
                 ],
                 exclude: /node_modules/
+            },
+            {
+                test: /\.less$/,
+                use: clientLessPro
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 8192,
+                    name: 'img/[name].[hash:7].[ext]'
+                }
             }
         ]
     },

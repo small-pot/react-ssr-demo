@@ -2,9 +2,21 @@ import webpack from "webpack"
 import baseWebpackConfig from './webpack.base.config'
 import merge from 'webpack-merge'
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
-import {clientConfig} from "../tools/babelConfig"
+import {clientConfig} from "./babelConfig"
 import LoadablePlugin from '@loadable/webpack-plugin'
 import path from 'path'
+import {clientLessDev} from "./lessLoaderConfig";
+const cssLoader=[
+    {loader:'css-hot-loader?reloadAll=true'},
+    {loader:MiniCssExtractPlugin.loader},
+    {
+        loader:'css-loader',
+        options: {
+            javascriptEnabled: true,
+            importLoaders: 1
+        }
+    }
+]
 const webpackConfig =merge(baseWebpackConfig,{
     mode:'development',
     devtool: '#cheap-module-eval-source-map',
@@ -20,6 +32,18 @@ const webpackConfig =merge(baseWebpackConfig,{
                     }
                 ],
                 exclude: /node_modules/
+            },
+            {
+                test: /\.less$/,
+                use: clientLessDev
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 8192,
+                    name: 'img/[name].[ext]'
+                }
             }
         ]
     },
@@ -35,4 +59,5 @@ const webpackConfig =merge(baseWebpackConfig,{
         new webpack.HotModuleReplacementPlugin()
     ]
 });
+console.log(webpackConfig)
 export default webpackConfig

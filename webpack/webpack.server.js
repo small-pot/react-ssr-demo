@@ -1,10 +1,10 @@
 import webpack from "webpack"
 import merge from "webpack-merge"
-import MiniCssExtractPlugin from "mini-css-extract-plugin"
 import nodeExternals from "webpack-node-externals"
 import baseWebpackConfig from "./webpack.base.config"
-import {serverConfig} from "../tools/babelConfig";
+import {serverConfig} from "./babelConfig";
 import path from 'path'
+import {serverLessConfig} from "./lessLoaderConfig";
 const webpackConfig = merge(baseWebpackConfig,{
     mode:'production',
     devtool:false,
@@ -30,6 +30,18 @@ const webpackConfig = merge(baseWebpackConfig,{
                     }
                 ],
                 exclude: /node_modules/
+            },
+            {
+                test: /\.less$/,
+                use: serverLessConfig
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 8192,
+                    name: 'img/[name].[hash:7].[ext]'
+                }
             }
         ]
     },
@@ -44,11 +56,7 @@ const webpackConfig = merge(baseWebpackConfig,{
         new webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify("production"),
             "process.env.REACT": JSON.stringify("server")
-        }),
-        // 服务端不支持window document等对象，需将css外链
-        new MiniCssExtractPlugin({
-            filename: "css/[name].[contenthash].css"
         })
     ]
 })
-module.exports=webpackConfig
+export default webpackConfig

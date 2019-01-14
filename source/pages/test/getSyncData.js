@@ -6,6 +6,5 @@ export default async function (req) {
         method:'get',
         url:'/auth/researcher/beikepkg/leke/share/details.htm'
     });
-    console.log(data.data);
     return {test:{list:data.data}};
 }

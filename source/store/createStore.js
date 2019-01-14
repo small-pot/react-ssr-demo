@@ -2,7 +2,7 @@ import rootModel from './model';
 import { createStore,applyMiddleware,combineReducers } from 'redux';
 import getReducer from './getReducer';
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery,take,fork,call,all } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga/effects';
 
 export default function (model,initState={}) {
     const saga={
