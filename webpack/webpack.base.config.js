@@ -15,10 +15,10 @@ const cssLoader = [
     },
     {loader: "postcss-loader"}
 ];
-
 function use(loaders) {
-    //return [isPro ? MiniCssExtractPlugin.loader : {loader: 'style-loader'}, ...loaders]
-    return [MiniCssExtractPlugin.loader, ...loaders]
+    const loader=[MiniCssExtractPlugin.loader, ...loaders];
+    !isPro&&loader.unshift({loader: 'css-hot-loader?reloadAll=true'})
+    return loader
 }
 
 export default {

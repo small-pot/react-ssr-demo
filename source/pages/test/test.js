@@ -16,7 +16,6 @@ class Test extends React.Component{
         this.state={
             current:1
         };
-        console.log(this.state.current);
     }
     pageChange(n){
         this.props.dispatch({type:'test/getList',page:n});
